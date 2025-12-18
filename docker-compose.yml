@@ -1,6 +1,7 @@
 services:
   converter:
     build: .
+    image: ghcr.io/gaoyifan/openai2ollama:main
     ports:
       - "11434:11434"
     environment:
@@ -10,6 +11,7 @@ services:
   mock-server:
     profiles: [ "test" ]
     build: .
+    image: ghcr.io/gaoyifan/openai2ollama:main
     command: [ "uv", "run", "mock_openai_server.py" ]
     ports:
       - "8001:8001"
