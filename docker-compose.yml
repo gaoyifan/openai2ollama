@@ -1,0 +1,17 @@
+services:
+  converter:
+    build: .
+    ports:
+      - "11434:11434"
+    environment:
+      - OPENAI_API_BASE=${OPENAI_API_BASE:-http://mock-server:8001/v1}
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-dummy}
+
+  mock-server:
+    profiles: [ "test" ]
+    build: .
+    command: [ "uv", "run", "mock_openai_server.py" ]
+    ports:
+      - "8001:8001"
+    environment:
+      - PORT=8001
